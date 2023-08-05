@@ -1,0 +1,30 @@
+{
+  "name": "airbnb-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all -p start:frontend start:backend",
+    "start:frontend": "cross-env PORT=5000 npm --prefix public run dev",
+    "start:admin": "npm --prefix admin-ui start",
+    "start:backend": "npm --prefix server start",
+    "postinstall": "npm i --prefix public && npm i --prefix admin-ui && npm i --prefix server"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koolkishan/nextjs-airbnb-clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koolkishan/nextjs-airbnb-clone/issues"
+  },
+  "homepage": "https://github.com/koolkishan/nextjs-airbnb-clone#readme",
+  "dependencies": {
+    "qs": "^6.11.2"
+  }
+}

@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.control-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 320px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 12px 24px;
+  margin: 20px;
+  font-size: 13px;
+  line-height: 2;
+  color: #6b6b76;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.mapboxgl-popup-content {
+  width: 18rem !important;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 1rem !important;
+  margin-right: 0.2rem;
+}
+
+.mapboxgl-popup {
+  width: 18rem !important;
+}
+
+div.mapboxgl-popup.mapboxgl-popup-anchor-top {
+  width: 18rem !important;
+  max-width: 18rem !important;
+  font-size: 1rem;
+}
