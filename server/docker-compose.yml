@@ -1,0 +1,56 @@
+version: "3"
+services:
+  server:
+    build:
+      context: .
+      args:
+        NPM_LOG_LEVEL: notice
+    ports:
+      - ${PORT}:3000
+    environment:
+      BCRYPT_SALT: ${BCRYPT_SALT}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      DB_URL: mysql://${DB_USER}:${DB_PASSWORD}@db:3306/${DB_NAME}
+    depends_on:
+      - migrate
+  migrate:
+    build:
+      context: .
+      args:
+        NPM_LOG_LEVEL: notice
+    command: npm run db:init
+    working_dir: /app/server
+    environment:
+      BCRYPT_SALT: ${BCRYPT_SALT}
+      DB_URL: mysql://${DB_USER}:${DB_PASSWORD}@db:3306/${DB_NAME}
+    depends_on:
+      db:
+        condition: service_healthy
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 1234:8080
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - ${DB_PORT}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - -h
+        - localhost
+        - -u
+        - ${DB_USER}
+      timeout: 45s
+      interval: 10s
+      retries: 10
+volumes:
+  mysql: ~
